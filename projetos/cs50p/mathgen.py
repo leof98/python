@@ -1,77 +1,91 @@
-  '''
+'''
 A program that generates random math problems.
-Last modified: 30/01
+Last modified: 01/02
 '''
 import random
 
-#
 def main():
-    rounds = 0
-    user_chances = 4
-    level = get_level()
-    while user_chances >= 1:
-        math_problem = MathProblem(level)
-        user_answer = math_problem.get_user_answer()
-        correct = math_problem.check_answer(user_answer)
-        # TODO: melhorar a interface com o usuário, como os problemas e as chances são exibidos
-        if not correct:
-            print(f'{math_problem.problem} = {math_problem.answer} <-')
-            user_chances -= 1
-            lifes = '*' * user_chances
-            if user_chances == 0:
-                print('Game Over')
-                break
-            print(f'Life: {lifes}')
-        else:
-            rounds += 1
-            print(f'Score: ({rounds * 100})')
+    game = Game()
+    game.play()
 
-            
-# Loop until user enters a valid level
-def get_level():
-    print('--------------------------------------')
-    print('           Random Math')
-    print('--------------------------------------')
-    while True:
-        level = input('Enter level (1, 2, or 3): ')
-        if level in ['1', '2', '3']:
-            break
-    return level
 
 # Class to generate math problems, takes a level (1, 2 or 3) as input
-class MathProblem:
+class Game:
+    def __init__(self):
+        self.rounds = 0
+        self.user_chances = 4
+        self.level = self.get_level()
+        
+    def play(self):
+        while self.user_chances > 0:
+            self.play_round()
+            self.display_chances()
+    
+    def play_round(self):
+        math = Problem(self.level)
+        user_answer = math.get_user_answer()
+        correct = math.check_answer(user_answer)
+        
+        if not correct:
+            math.display_incorrect()
+            self.user_chances -= 1
+    
+    def display_chances(self):
+        if self.user_chances == 0:
+            print('Game over')
+        else:
+            lifes = '*' * self.user_chances
+            print(f'Chances: {lifes}')
+        
+# Loop until user enters a valid level
+    def get_level(self):
+        print('--------------------------------------')
+        print('           Random Math')
+        print('--------------------------------------')
+        while True:
+            level = input('Enter level (1, 2, or 3): ')
+            if level in ['1', '2', '3']:
+                break
+        return level
+    
+    
+    def display_score(self, rounds):
+        print(f'Score: {rounds * 100}')
+        
+class Problem:
     def __init__(self, level):
         self.level = level
         self.problem = self.generate_problem()
         self.answer = eval(self.problem)
-        
-    # Generate math problem based on level
-    # TODO: Repensar a dificuldade dos problemas de cada nível
-    # TODO: Adicionar rounds
+    
     def generate_problem(self):
         # round += 1
-        if self.level == '1':
-            operation = random.choice(['+', '-'])
-            a, b = random.randint(1, 10), random.randint(1, 10)
-        elif self.level == '2':
-            operation = random.choice(['+', '-', '*', '/'])
-            a, b = random.randint(1, 10), random.randint(1, 10)
-        else:
-            operation = random.choice(['+', '-', '*', '/'])
-            a, b = random.randint(1, 20), random.randint(1, 20)
+        # Usando list comprehension para separar os operadores de acordo com o nível
+        operations = {'1': ['+', '-'], '2': ['+', '-', '*', '/'], '3': ['+', '-', '*', '/', '**']}
+        operation = random.choice(operations[self.level])
+        # List comprehension novamente
+        numbers = {'1': list(range(0,11)), '2': list(range(0,21)), '3': list(range(0,31))}
+        a, b = random.choice(numbers[self.level]), random.choice(numbers[self.level])
+        if operation == '**':
+            a, b = random.randint(1, 5), random.randint(1, 3)
+        elif operation == '*' or operation == '/':
+            a, b = random.randint(1, 20), random.randint(1, 5)
         return f'{a} {operation} {b}'
-
-    # Get user answer
+        
+    # Get user's answer
     def get_user_answer(self):
         print('--------------------------------------')
         return input(f'{self.problem} = ')
-
-    # Take an answer and check if it is correct
+    
+    # check if the answer is correct
     def check_answer(self, user_answer):
         try:
-            return int(user_answer) == self.answer
+            return float(user_answer) == float(self.answer)
         except:
             return False
+    
+    def display_incorrect(self):
+        print(f'{self.problem} = {self.answer} <-')
     
 
 if __name__ == '__main__':
