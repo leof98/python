@@ -16,3 +16,5 @@ pygame.init()
 
 # Set up display
 screen = pygame.display.###
+##
+#
