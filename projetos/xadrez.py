@@ -15,6 +15,143 @@ PIECE_IMAGES = {}
 pygame.init()
 
 # Set up display
-screen = pygame.display.###
-##
-#
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption('Chess')
+
+
+# Load images
+def load_images():
+    pieces = ['wp', 'bp', 'wr', 'br', 'wn', 'bn', 'wb', 'bb', 'wq', 'bq', 'wk', 'bk']
+    for piece in pieces:
+        PIECE_IMAGES[piece] = pygame.transform.scale(pygame.image.load(f'images/{piece}.png'), (SQUARE_SIZE, SQUARE_SIZE))
+
+class Piece:
+    def __init__(self, color):
+        self.color = color
+        self.image = None
+
+    def draw(self, screen, row, col):
+        if self.image:
+            screen.blit(self.image, (col * SQUARE_SIZE, row * SQUARE_SIZE))
+
+    def get_moves(self, board, row, col):
+        # TODO: Implement this method
+        pass
+
+class Pawn(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.image = PIECE_IMAGES[f'{color}p']
+
+    def get_moves(self, board, row, col):
+        #TODO
+        pass
+
+class Rook(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.image = PIECE_IMAGES[f'{color}r']
+
+    def get_moves(self, board, row, col):
+        #TODO
+        pass
+
+class Knight(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.image = PIECE_IMAGES[f'{color}n']
+
+    def get_moves(self, board, row, col):
+        #TODO
+        pass
+
+class Bishop(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.image = PIECE_IMAGES[f'{color}b']
+
+    def get_moves(self, board, row, col):
+        #TODO
+        pass
+
+class Queen(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.image = PIECE_IMAGES[f'{color}q']
+
+    def get_moves(self, board, row, col):
+        #TODO
+        pass
+
+class King(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.image = PIECE_IMAGES[f'{color}k']
+
+    def get_moves(self, board, row, col):
+        #TODO
+        pass
+
+class Board:
+    def __init__(self):
+        self.board = self.create_board()
+
+    def create_board(self):
+        # Initialize board with empty squares
+        board = [[None for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
+
+        # Placing pawns on the board
+        for i in range(BOARD_SIZE):
+            board[1][i] = Pawn('w') # White pawns
+            board[6][i] = Pawn('b') # Black pawns
+
+        # Placing rooks on the board
+        board[0][0] = board[0][7] = Rook('w')
+        board[7][0] = board[7][7] = Rook('b')
+
+        # Placing knights on the board
+        board[0][1] = board[0][6] = Knight('w')
+        board[7][1] = board[7][6] = Knight('b')
+
+        # Placing bishops on the board
+        board[0][2] = board[0][5] = Bishop('w')
+        board[7][2] = board[7][5] = Bishop('b')
+
+        # Placing queens on the board
+        board[0][3] = Queen('w')
+        board[7][3] = Queen('b')
+
+        # Placing kings on the board
+        board[0][4] = King('w')
+        board[7][4] = King('b')
+
+        return board
+    
+def draw(self, screen):
+        for row in range(BOARD_SIZE):
+            for col in range(BOARD_SIZE):
+                color = WHITE if (row + col) % 2 == 0 else BLACK
+                pygame.draw.rect(screen, color, (col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+                piece = self.board[row][col]
+                if piece:
+                    piece.draw(screen, row, col)
+
+class Game:
+    def __init__(self):
+        self.board = Board()
+
+    def run(self):
+        running = True
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+            self.board.draw(screen)
+            pygame.display.flip()
+
+if __name__ == '__main__':
+    load_images()
+    game = Game()
+    game.run()   
