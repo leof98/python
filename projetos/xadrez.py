@@ -16,7 +16,7 @@ pygame.init()
 
 # Set up display
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('Chess')
+pygame.display.set_caption('Chess 0.0')
 
 
 # Load images
