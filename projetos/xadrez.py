@@ -156,3 +156,4 @@ if __name__ == '__main__':
     load_images()
     game = Game()
     game.run()
+    #
