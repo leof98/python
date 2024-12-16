@@ -1,4 +1,6 @@
 # Day 21
+# Expanding on OOP concets, classes inheritance
+# - My favorite project(day) so far, really fun to build it.
 
 from turtle import Screen
 from snake import Snake
