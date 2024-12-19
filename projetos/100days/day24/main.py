@@ -1,4 +1,5 @@
 # Day 24
+# Learning to manipulating files (read, write, save)
 PLACEHOLDER = "[name]"
 
 with open("./input/Names/invited_names.txt") as names:
