@@ -1,4 +1,4 @@
-#TODO: Create a letter using starting_letter.txt
+# Day 24
 PLACEHOLDER = "[name]"
 
 with open("./input/Names/invited_names.txt") as names:
