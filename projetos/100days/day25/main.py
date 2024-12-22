@@ -1,6 +1,7 @@
 # Day 25
 # Learning to work with csv files
 # Also learning about the pandas library
+# * Updated on day 26 to add a list comprehension to the code
 import turtle
 import pandas
 
@@ -12,25 +13,22 @@ turtle.shape(image)
 turtle.penup()
 screen.setup(width=700, height=500)
 
-
 data = pandas.read_csv("50_states.csv")
 states = data.state.tolist()
 
 user_score = 0
 guessed_states = []
 
-states_missing = []
 while len(guessed_states) < 50:
     answer_state = screen.textinput(title=f"{user_score}/50 States Correct",
     prompt="What's another state name?").title()
 
     if answer_state == "Exit":
-        for state in states:
-            if state not in guessed_states:
-                states_missing.append(state)
-        df = pandas.DataFrame(states_missing)
-        df.to_csv("states_to_learn")
+        missing_states = [state for state in states if state not in guessed_states]
+        new_data = pandas.DataFrame(missing_states)
+        new_data.to_csv("states_to_learn")
         break
+        
     if answer_state in states:
         if answer_state not in guessed_states:
             t = turtle.Turtle()
