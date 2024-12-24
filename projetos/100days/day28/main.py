@@ -91,13 +91,6 @@ check_label.grid(row=3, column=1)
 
 
 # Buttons
-
-def start():
-    pass
-
-def reset():
-    pass
-
 start_button = Button(text="Start", command=start_timer, highlightthickness=0)
 start_button.grid(row=2, column=0)
 
