@@ -73,7 +73,7 @@ window.title("Pomodoro")
 window.config(padx=100, pady= 50, bg=YELLOW)
 
 
-window.after(1000, )
+window.after(1000)
 
 
 canvas = Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
