@@ -1,4 +1,3 @@
-# python
 # Python Projects Repository  
 
 Welcome to my Python Projects Repository! This is where I store my Python programming exercises and projects, categorized into two main sections based on courses and bootcamps I’ve completed.  
