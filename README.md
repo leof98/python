@@ -1,6 +1,7 @@
 # Python Projects Repository  
 
-Welcome to my Python Projects Repository! This is where I store my Python programming exercises and projects, categorized into two main sections based on courses and bootcamps I’ve completed.  
+Welcome to my Python Projects Repository! 
+This is where I store my Python programming exercises and projects. 
 
 ## About  
 
@@ -33,10 +34,6 @@ Throughout these projects, I’ve used:
 - **Python**: For all coding tasks and projects.  
 - **Jupyter Notebook**: For interactive coding and explanations (where applicable).  
 - **External Libraries**: Such as Pandas, Flask, Matplotlib, and more (depending on the project).  
-
-## How to Use  
-
-Feel free to browse the repository and use the code for educational purposes. Each folder contains detailed subdirectories with README files for specific projects, explaining their purpose and implementation.  
 
 ## Contributing  
 
