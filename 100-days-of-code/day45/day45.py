@@ -1,4 +1,5 @@
 # Day 45
+# Learning about Web Scraping; Beautiful Soup lib. 
 from bs4 import BeautifulSoup
 import requests
 
