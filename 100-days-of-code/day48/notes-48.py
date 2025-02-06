@@ -39,4 +39,28 @@ print(final_dict)
 ## Close closes one tab
 # driver.close()
 ## Quit closes all tabs
+
+# n_articles = driver.find_element(By.XPATH, value='/html/body/div[2]/div/div[3]/main/div[3]/div[3]/div[1]/div[1]/div/div[3]/ul/li[2]/a[1]')
+
+# article_count = driver.find_element(By.CSS_SELECTOR, value="#articlecount a")
+#
+# # Find element by Link text
+# all_portals = driver.find_element(By.LINK_TEXT, value="Content portals")
+# all_portals.click()
+
+# driver.maximize_window()
+# # Find the 'Search' <input> by name
+# search = driver.find_element(By.NAME, value="search")
+# search.send_keys("python")
+# search.send_keys(Keys.ENTER)
+
+# first_name = driver.find_element(By.NAME, value="fName")
+# first_name.send_keys("John")
+# last_name = driver.find_element(By.NAME, value="lName")
+# last_name.send_keys("Doe")
+# email = driver.find_element(By.NAME, value="email")
+# email.send_keys("john@doe.com")
+# submit_button = driver.find_element(By.CLASS_NAME, value="btn-primary")
+# submit_button.click()
+
 driver.quit()
