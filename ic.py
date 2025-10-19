@@ -1,4 +1,5 @@
-# Tabela de soma
+# Dicionário que representa a soma entre dois dígitos (de "0" a "9"), como strings.
+# Exemplo: "07" → "7", "19" → "10", "99" → "18"
 tabela_soma = {
     "00": "0", "01": "1", "02": "2", "03": "3", "04": "4", "05": "5", "06": "6", "07": "7", "08": "8", "09": "9",
     "10": "1", "11": "2", "12": "3", "13": "4", "14": "5", "15": "6", "16": "7", "17": "8", "18": "9", "19": "10",
@@ -12,32 +13,51 @@ tabela_soma = {
     "90": "9", "91": "10", "92": "11", "93": "12", "94": "13", "95": "14", "96": "15", "97": "16", "98": "17", "99": "18",
 }
 
+
 def soma_strings(num1, num2):
+    # Índices para começar do último dígito de cada número
     i, j = len(num1) - 1, len(num2) - 1
+    # "carry" guarda o vai-um; começa como "0"
     carry = "0"
+    # "resultado" acumula o número final, construído da direita para a esquerda
     resultado = ""
 
+    # O loop continua enquanto houver dígitos ou ainda existir carry
     while i >= 0 or j >= 0 or carry != "0":
+        # Pega os dígitos atuais; se já acabou a string, usa "0"
         dig1 = num1[i] if i >= 0 else "0"
         dig2 = num2[j] if j >= 0 else "0"
 
+        # Soma os dois dígitos (sem considerar o carry ainda)
         soma_digitos = tabela_soma[dig1 + dig2]
-        soma_final = tabela_soma[soma_digitos[-1] + carry] if len(soma_digitos) == 2 else tabela_soma[soma_digitos + carry]
-        
+
+        # Se a soma dos dois dígitos for de 2 caracteres (ex.: "10"), soma o último com o carry
+        # Caso contrário, soma o próprio resultado com o carry
+        if len(soma_digitos) == 2:
+            soma_final = tabela_soma[soma_digitos[-1] + carry]  # Exemplo: "10" + carry="1" → soma "0" + "1"
+        else:
+            soma_final = tabela_soma[soma_digitos + carry]       # Exemplo: "7" + carry="1" → "71"
+
+        # Define o novo carry:
+        # Se alguma das somas produziu 2 dígitos (ex.: "10"), significa que há vai-um.
         if len(soma_digitos) == 2 or len(soma_final) == 2:
             carry = "1"
         else:
             carry = "0"
 
+        # Pega o último dígito do resultado da soma atual e adiciona à esquerda do resultado final
         resultado = soma_final[-1] + resultado
+
+        # Move os ponteiros uma posição para a esquerda
         i -= 1
         j -= 1
 
+    # Remove zeros à esquerda, garantindo que "000" vire "0"
     return resultado.lstrip("0") or "0"
 
 
-# Testes
-print(soma_strings("99", "1"))
-print(soma_strings("19856", "145"))    # "20001"
-print(soma_strings("5", "5"))
-print(soma_strings("0", "0")) 
+# Exemplos de teste:
+print(soma_strings("99", "1"))       # Saída esperada: "100"
+print(soma_strings("123", "877"))    # Saída esperada: "1000"
+print(soma_strings("5", "5"))        # Saída esperada: "10"
+print(soma_strings("0", "0"))        # Saída esperada: "0"
